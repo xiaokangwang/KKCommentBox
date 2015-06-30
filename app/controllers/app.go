@@ -234,7 +234,7 @@ func listCommentByChunk(target string, extout bool)[]CommentItem{
 
 func genComment(Dt,Email,Ip,Name string)CommentItem{
 	var CommentItema CommentItem
-	id,_=uuid.NewV4()
+	id,_:=uuid.NewV4()
 	CommentItema.Id=id.String()
 	CommentItema.Dt=Dt
 	CommentItema.Email=Email
