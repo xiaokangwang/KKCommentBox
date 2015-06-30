@@ -56,6 +56,53 @@ func (c App) CommentBasic(chunk string) revel.Result {
 }
 
 
+func (c App) API_GetCommentByChunk()revel.Result{
+
+	//check request
+
+	if(len(c.Params.Form["Chunk"])!=1){
+		return nil //TODO: show err reason
+	}
+
+	chunk := c.Params.Form["Chunk"][0]
+
+
+	res:=listCommentByChunk(chunk,KKDEV_DEV_MODE) //TODO:filter result
+
+	return c.RenderJson(res)
+}
+
+
+func (c App)API_PostComment()revel.Result{
+
+	if(len(c.Params.Form["Name"])!=1){
+		return nil
+	}
+
+	if(len(c.Params.Form["Email"])!=1){
+		return nil
+	}
+
+	if(len(c.Params.Form["Dt"])!=1){
+		return nil
+	}
+
+	if(len(c.Params.Form["Chunk"])!=1){
+		return nil
+	}
+
+	ret:=genComment(c.Params.Form["Dt"][0],c.Params.Form["Email"][0],getIp(c),c.Params.Form["Name"][0])
+	ret.CmChunk=c.Params.Form["Chunk"][0]
+	postComment(ret,KKDEV_DEV_MODE)
+
+	return c.RenderJson(ret)
+
+
+
+
+}
+
+
 func getIp(c App) string{
 
 	var uip string

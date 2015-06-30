@@ -8,6 +8,9 @@ GET     /                                       App.Index
 
 *     /commentbasic/:chunk                    App.CommentBasic
 
+*     /api/GetCommentByChunk                  App.API_GetCommentByChunk
+*     /api/PostComment                  App.API_PostComment
+
 # Ignore favicon requests
 GET     /favicon.ico                            404
 
